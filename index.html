@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070707">
+  <meta name="description" content="Hartt Fitness em Marechal Hermes: musculação, jiu-jitsu, muay thai e aulas coletivas em uma estrutura completa.">
+  <title>Hartt Fitness | Marechal Hermes</title>
+  <link rel="preconnect" href="https://www.instagram.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070707'/%3E%3Cpath d='M13 14h10v13h18V14h10v36H41V36H23v14H13z' fill='%23f5c400'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --black: #070707;
+      --black-soft: #101010;
+      --card: #151515;
+      --yellow: #f5c400;
+      --yellow-light: #ffe56a;
+      --white: #f7f7f4;
+      --muted: #a9a9a2;
+      --line: rgba(255,255,255,.12);
+      --max: 1180px;
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .025;
+      z-index: 20;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { display: block; max-width: 100%; }
+    section { scroll-margin-top: 90px; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--yellow);
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 800;
+      font-size: .9rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 3px; background: var(--yellow); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,7,7,.88);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .brand-mark {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      background: var(--yellow); color: var(--black);
+      font: 900 1.35rem/1 "Archivo Black", sans-serif;
+      clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
+    }
+    .brand-copy strong { display: block; font: 1.1rem/1 "Archivo Black", sans-serif; letter-spacing: .03em; }
+    .brand-copy small { color: var(--yellow); font: 700 .68rem/1.3 "Inter", sans-serif; letter-spacing: .18em; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { color: #d8d8d3; font-size: .9rem; font-weight: 600; transition: .2s; }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-cta, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      transition: transform .2s, background .2s, border-color .2s;
+      cursor: pointer;
+    }
+    .btn:hover, .nav-cta:hover { transform: translateY(-2px); background: var(--yellow-light); }
+    .btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.28); }
+    .btn-outline:hover { background: rgba(255,255,255,.07); border-color: var(--yellow); }
+    .menu-btn { display: none; background: transparent; border: 0; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+
+    .hero {
+      position: relative;
+      min-height: 720px;
+      display: grid;
+      align-items: center;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 78% 30%, rgba(245,196,0,.27), transparent 23%),
+        linear-gradient(110deg, rgba(0,0,0,.97) 12%, rgba(0,0,0,.73) 55%, rgba(0,0,0,.2)),
+        repeating-linear-gradient(125deg, #121212 0 26px, #0b0b0b 26px 52px);
+    }
+    .hero::after {
+      content: "HARTT";
+      position: absolute;
+      z-index: -1;
+      right: -1.5vw;
+      bottom: -6vw;
+      font: 12vw/1 "Archivo Black", sans-serif;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(255,255,255,.07);
+      transform: rotate(-7deg);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 72px; padding: 95px 0 78px; }
+    h1, h2, h3 { text-transform: uppercase; }
+    h1 {
+      max-width: 760px;
+      margin: 20px 0 24px;
+      font: clamp(3.4rem, 7vw, 6.9rem)/.86 "Archivo Black", sans-serif;
+      letter-spacing: -.055em;
+    }
+    h1 span { color: var(--yellow); }
+    .hero-copy p { max-width: 650px; color: #c9c9c3; font-size: 1.05rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .hero-proof { display: flex; gap: 28px; margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line); }
+    .hero-proof div { display: grid; gap: 2px; }
+    .hero-proof strong { color: var(--yellow); font: 2rem/1 "Barlow Condensed", sans-serif; }
+    .hero-proof span { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; }
+
+    .hero-panel {
+      position: relative;
+      min-height: 485px;
+      border: 1px solid rgba(245,196,0,.35);
+      border-radius: 34px;
+      background: linear-gradient(145deg, rgba(245,196,0,.18), rgba(21,21,21,.95) 50%);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    }
+    .hero-panel::before {
+      content: ""; position: absolute; inset: 20px; border: 1px solid rgba(255,255,255,.1); border-radius: 24px;
+    }
+    .slash { position: absolute; top: -80px; right: 65px; width: 125px; height: 680px; background: var(--yellow); transform: rotate(24deg); opacity: .95; }
+    .hero-badge {
+      position: absolute; top: 38px; left: 38px;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
+      padding: 10px 15px; background: rgba(0,0,0,.65);
+      font-size: .78rem; font-weight: 800; letter-spacing: .12em;
+    }
+    .hero-word {
+      position: absolute; left: 32px; right: 32px; bottom: 80px;
+      font: clamp(4rem, 8vw, 7rem)/.82 "Archivo Black", sans-serif;
+      letter-spacing: -.07em; color: var(--white); text-shadow: 0 8px 35px #000;
+    }
+    .hero-word span { display: block; color: var(--yellow); }
+    .hero-location { position: absolute; left: 38px; bottom: 35px; font: 700 .88rem/1.2 "Inter", sans-serif; }
+
+    .info-strip { position: relative; z-index: 2; margin-top: -42px; }
+    .info-grid {
+      display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: #111; box-shadow: 0 24px 55px rgba(0,0,0,.42); overflow: hidden;
+    }
+    .info-item { min-height: 130px; padding: 26px; border-right: 1px solid var(--line); display: grid; align-content: center; gap: 8px; }
+    .info-item:last-child { border: 0; }
+    .info-item small { color: var(--yellow); text-transform: uppercase; font: 800 .72rem/1 "Inter", sans-serif; letter-spacing: .12em; }
+    .info-item strong { font-size: .98rem; line-height: 1.45; }
+
+    .section { padding: 112px 0; }
+    .section-dark { background: var(--black-soft); }
+    .section-heading { display: grid; grid-template-columns: .85fr 1.15fr; gap: 60px; align-items: end; margin-bottom: 50px; }
+    .section-heading h2 { margin-top: 15px; font: clamp(2.5rem, 5vw, 4.9rem)/.93 "Archivo Black", sans-serif; letter-spacing: -.045em; }
+    .section-heading p { color: var(--muted); max-width: 650px; justify-self: end; }
+
+    .modalities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .modality {
+      min-height: 260px; padding: 28px;
+      position: relative; overflow: hidden;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(150deg, #1b1b1b, #0d0d0d);
+      transition: transform .25s, border-color .25s;
+    }
+    .modality:hover { transform: translateY(-6px); border-color: rgba(245,196,0,.7); }
+    .modality::after { content: attr(data-number); position: absolute; right: -8px; bottom: -32px; color: rgba(255,255,255,.04); font: 8rem/1 "Archivo Black"; }
+    .modality.featured { grid-column: span 2; background: var(--yellow); color: var(--black); }
+    .modality-icon { width: 50px; height: 50px; display: grid; place-items: center; border-radius: 14px; background: rgba(245,196,0,.12); color: var(--yellow); font-size: 1.45rem; }
+    .featured .modality-icon { background: rgba(0,0,0,.12); color: #000; }
+    .modality h3 { margin-top: 54px; font: 2rem/1 "Barlow Condensed", sans-serif; }
+    .modality p { margin-top: 10px; color: var(--muted); font-size: .88rem; }
+    .featured p { color: rgba(0,0,0,.72); }
+
+    .gallery-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+    .gallery-tab {
+      padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px;
+      background: transparent; color: var(--muted); font-weight: 700; cursor: pointer;
+    }
+    .gallery-tab.active { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+    .gallery-panel { display: none; }
+    .gallery-panel.active { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .insta-card { min-height: 665px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; }
+    .insta-card iframe { display: block; width: 100%; height: 665px; border: 0; background: #fff; }
+    .gallery-note { margin-top: 20px; color: var(--muted); font-size: .84rem; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .about-main, .about-side { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .about-main { padding: 48px; background: linear-gradient(135deg, #171717, #0d0d0d); }
+    .about-main h2 { margin: 14px 0 22px; font: clamp(2.5rem, 5vw, 4.5rem)/.9 "Archivo Black"; letter-spacing: -.05em; }
+    .about-main p { color: var(--muted); }
+    .about-side { display: grid; grid-template-rows: 1fr 1fr; }
+    .about-stat { padding: 34px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: #141414; }
+    .about-stat + .about-stat { border-top: 1px solid var(--line); }
+    .about-stat strong { color: var(--yellow); font: 3.4rem/1 "Barlow Condensed"; }
+    .about-stat p { max-width: 270px; color: #cecec8; font-size: .9rem; }
+
+    .reviews { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .review { padding: 34px; border: 1px solid var(--line); border-radius: var(--radius); background: #141414; }
+    .stars { color: var(--yellow); letter-spacing: .16em; }
+    .review blockquote { margin: 20px 0 22px; font-size: 1.03rem; color: #e5e5df; }
+    .review cite { color: var(--muted); font-style: normal; font-size: .82rem; }
+
+    .contact-box {
+      display: grid; grid-template-columns: 1.08fr .92fr; gap: 26px;
+      padding: 55px; border-radius: 32px;
+      background: var(--yellow); color: var(--black);
+      position: relative; overflow: hidden;
+    }
+    .contact-box::after { content: "H"; position: absolute; right: -20px; bottom: -55px; color: rgba(0,0,0,.08); font: 18rem/1 "Archivo Black"; }
+    .contact-box h2 { font: clamp(2.8rem, 5vw, 5rem)/.88 "Archivo Black"; letter-spacing: -.055em; }
+    .contact-box p { margin-top: 18px; max-width: 560px; color: rgba(0,0,0,.74); }
+    .contact-actions { position: relative; z-index: 1; display: grid; align-content: center; gap: 12px; }
+    .contact-actions .btn { background: #090909; color: var(--white); width: 100%; }
+    .contact-actions .btn:hover { background: #222; }
+    .contact-actions .btn-outline { background: transparent; color: #090909; border-color: rgba(0,0,0,.32); }
+
+    footer { border-top: 1px solid var(--line); padding: 38px 0; }
+    .footer-grid { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer-grid p { color: var(--muted); font-size: .82rem; }
+    .footer-links { display: flex; gap: 18px; color: #d5d5cf; font-size: .85rem; }
+
+    .whatsapp-float {
+      position: fixed; right: 22px; bottom: 22px; z-index: 8;
+      width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center;
+      background: #25d366; color: #07180d; font-size: 1.55rem; box-shadow: 0 14px 40px rgba(0,0,0,.45);
+      transition: transform .2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.07); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .nav-links { position: fixed; inset: 74px 0 auto; padding: 22px; flex-direction: column; align-items: stretch; background: #0b0b0b; border-bottom: 1px solid var(--line); transform: translateY(-140%); transition: .25s; }
+      .nav-links.open { transform: translateY(0); }
+      .nav-links a { display: block; padding: 10px; }
+      .menu-btn { display: block; }
+      .nav > .nav-cta { display: none; }
+      .hero-grid, .section-heading, .about-grid, .contact-box { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .hero-grid { gap: 48px; }
+      .hero-panel { min-height: 380px; }
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
+      .info-item:nth-child(2) { border-right: 0; }
+      .info-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .modalities { grid-template-columns: repeat(2, 1fr); }
+      .section-heading p { justify-self: start; }
+    }
+
+    @media (max-width: 650px) {
+      .container { width: min(100% - 26px, var(--max)); }
+      .hero-grid { padding: 70px 0 80px; }
+      h1 { font-size: clamp(3.1rem, 17vw, 4.8rem); }
+      .hero-proof { gap: 14px; justify-content: space-between; }
+      .hero-proof strong { font-size: 1.6rem; }
+      .hero-panel { min-height: 320px; }
+      .hero-word { font-size: 3.5rem; }
+      .info-strip { margin-top: -28px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .info-item { min-height: 105px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .section { padding: 82px 0; }
+      .modalities { grid-template-columns: 1fr; }
+      .modality.featured { grid-column: span 1; }
+      .gallery-panel.active, .reviews { grid-template-columns: 1fr; }
+      .insta-card, .insta-card iframe { min-height: 615px; height: 615px; }
+      .about-main, .contact-box { padding: 32px 24px; }
+      .contact-box { border-radius: 24px; }
+      .footer-grid { align-items: flex-start; flex-direction: column; }
+      .footer-links { flex-wrap: wrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="Hartt Fitness - início">
+        <span class="brand-mark">H</span>
+        <span class="brand-copy"><strong>HARTT</strong><small>FITNESS</small></span>
+      </a>
+
+      <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#estrutura">Estrutura</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+
+      <a class="nav-cta" href="https://wa.me/5521968200542?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Hartt%20Fitness%20e%20quero%20saber%20mais." target="_blank" rel="noopener">Quero treinar</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-grid container">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Hartt Fitness • Marechal Hermes</span>
+          <h1>Seu limite é só o <span>começo.</span></h1>
+          <p>Estrutura completa, musculação, artes marciais e aulas coletivas para você construir força, saúde e constância em um só lugar.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://wa.me/5521968200542?text=Ol%C3%A1%2C%20quero%20conhecer%20a%20Hartt%20Fitness." target="_blank" rel="noopener">Agendar uma visita</a>
+            <a class="btn btn-outline" href="#modalidades">Ver modalidades</a>
+          </div>
+          <div class="hero-proof" aria-label="Destaques da academia">
+            <div><strong>4,5</strong><span>Avaliação</span></div>
+            <div><strong>566+</strong><span>Avaliações</span></div>
+            <div><strong>22h</strong><span>Fecha hoje</span></div>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal" aria-label="Identidade visual Hartt Fitness">
+          <span class="slash"></span>
+          <span class="hero-badge">ESTRUTURA + AULAS COLETIVAS</span>
+          <div class="hero-word">TREINE.<span>EVOLUA.</span></div>
+          <p class="hero-location">Rua Canaã, 136 • Marechal Hermes</p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="info-strip container reveal" aria-label="Informações rápidas">
+      <div class="info-grid">
+        <a class="info-item" href="https://www.google.com/maps/search/?api=1&query=Rua+Cana%C3%A3+136+Marechal+Hermes+Rio+de+Janeiro" target="_blank" rel="noopener">
+          <small>Onde estamos</small><strong>Rua Canaã, 136<br>Marechal Hermes, Rio de Janeiro</strong>
+        </a>
+        <div class="info-item"><small>Funcionamento</small><strong>Aberto hoje<br>Fechamento às 22h</strong></div>
+        <a class="info-item" href="tel:+552135986574"><small>Telefone</small><strong>(21) 3598-6574</strong></a>
+        <a class="info-item" href="https://wa.me/5521968200542" target="_blank" rel="noopener"><small>WhatsApp</small><strong>(21) 96820-0542</strong></a>
+      </div>
+    </aside>
+
+    <section class="section" id="modalidades">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><span class="eyebrow">Escolha seu treino</span><h2>Modalidades para todos os objetivos.</h2></div>
+          <p>Da força na musculação à disciplina das lutas e à energia das aulas coletivas. A Hartt reúne diferentes experiências de treino para você encontrar a sua.</p>
+        </div>
+
+        <div class="modalities">
+          <article class="modality featured reveal" data-number="01"><span class="modality-icon">◆</span><h3>Musculação</h3><p>Ampla variedade de equipamentos para força, hipertrofia, condicionamento e qualidade de vida.</p></article>
+          <article class="modality reveal" data-number="02"><span class="modality-icon">🥋</span><h3>Jiu-Jitsu</h3><p>Técnica, respeito e evolução para diferentes idades e níveis.</p></article>
+          <article class="modality reveal" data-number="03"><span class="modality-icon">🥊</span><h3>Muay Thai</h3><p>Condicionamento, defesa pessoal, foco e potência em cada aula.</p></article>
+          <article class="modality reveal" data-number="04"><span class="modality-icon">⚡</span><h3>Funcional</h3><p>Movimentos dinâmicos para melhorar mobilidade, resistência e desempenho.</p></article>
+          <article class="modality reveal" data-number="05"><span class="modality-icon">↟</span><h3>Jump</h3><p>Aula coletiva intensa, divertida e com alto gasto energético.</p></article>
+          <article class="modality reveal" data-number="06"><span class="modality-icon">♫</span><h3>Zumba</h3><p>Ritmo, movimento e energia para cuidar da saúde se divertindo.</p></article>
+          <article class="modality reveal" data-number="07"><span class="modality-icon">◉</span><h3>Bike Indoor</h3><p>Treino cardiovascular motivante para desenvolver ritmo e resistência.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="galeria">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><span class="eyebrow">A Hartt em movimento</span><h2>Treinos reais. Energia real.</h2></div>
+          <p>Registros publicados no Instagram oficial da Hartt Fitness. Selecione uma modalidade para conhecer um pouco mais da rotina da academia.</p>
+        </div>
+
+        <div class="gallery-tabs reveal" role="tablist" aria-label="Categorias da galeria">
+          <button class="gallery-tab active" type="button" role="tab" aria-selected="true" data-gallery-target="musculacao">Musculação</button>
+          <button class="gallery-tab" type="button" role="tab" aria-selected="false" data-gallery-target="jiujitsu">Jiu-Jitsu</button>
+          <button class="gallery-tab" type="button" role="tab" aria-selected="false" data-gallery-target="coletivas">Aulas coletivas</button>
+        </div>
+
+        <div class="gallery-panel active" id="musculacao" role="tabpanel">
+          <article class="insta-card"><iframe loading="lazy" title="Musculação na Hartt Fitness" src="https://www.instagram.com/reel/DMfy2cxx1vI/embed/" allowfullscreen></iframe></article>
+          <article class="insta-card"><iframe loading="lazy" title="Estrutura da Hartt Fitness" src="https://www.instagram.com/reel/DFyoQ_6vkXq/embed/" allowfullscreen></iframe></article>
+        </div>
+
+        <div class="gallery-panel" id="jiujitsu" role="tabpanel">
+          <article class="insta-card"><iframe loading="lazy" title="Aulas de jiu-jitsu na Hartt Fitness" src="https://www.instagram.com/p/DbmP6N3Nadu/embed/" allowfullscreen></iframe></article>
+          <article class="insta-card"><iframe loading="lazy" title="Atleta de jiu-jitsu da Hartt Fitness" src="https://www.instagram.com/p/DabGx2CEasB/embed/" allowfullscreen></iframe></article>
+        </div>
+
+        <div class="gallery-panel" id="coletivas" role="tabpanel">
+          <article class="insta-card"><iframe loading="lazy" title="Aulão de Jump da Hartt Fitness" src="https://www.instagram.com/reel/DYDhOpRtvjz/embed/" allowfullscreen></iframe></article>
+          <article class="insta-card"><iframe loading="lazy" title="Aulas e energia da Hartt Fitness" src="https://www.instagram.com/reel/DFWVAP-tY-2/embed/" allowfullscreen></iframe></article>
+        </div>
+
+        <p class="gallery-note">As publicações são carregadas diretamente do perfil oficial @academiaharttoficial.</p>
+      </div>
+    </section>
+
+    <section class="section" id="estrutura">
+      <div class="container">
+        <div class="about-grid">
+          <article class="about-main reveal">
+            <span class="eyebrow">Mais do que aparelhos</span>
+            <h2>Um espaço para transformar rotina em resultado.</h2>
+            <p>A Hartt Fitness conta com amplo espaço, variedade de equipamentos, acompanhamento profissional e aulas que ajudam alunos de diferentes perfis a treinar com segurança, constância e propósito.</p>
+          </article>
+          <div class="about-side reveal">
+            <div class="about-stat"><strong>1–2h</strong><p>Tempo médio que os visitantes costumam permanecer na academia.</p></div>
+            <div class="about-stat"><strong>9+</strong><p>Possibilidades de treino entre musculação, lutas e aulas coletivas.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" aria-labelledby="avaliacoes-titulo">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><span class="eyebrow">Experiência dos alunos</span><h2 id="avaliacoes-titulo">Quem treina, recomenda.</h2></div>
+          <p>Comentários públicos ajudam novos alunos a entender o ambiente, a estrutura e o atendimento antes da primeira visita.</p>
+        </div>
+        <div class="reviews">
+          <article class="review reveal"><div class="stars" aria-label="5 estrelas">★★★★★</div><blockquote>“Ótima qualidade, bons profissionais e ótimos aparelhos. Atende em tudo!”</blockquote><cite>Avaliação pública no Google</cite></article>
+          <article class="review reveal"><div class="stars" aria-label="5 estrelas">★★★★★</div><blockquote>“Espaço com boa distribuição interna e estrutura boa para eventos de médio porte.”</blockquote><cite>Avaliação pública no Google</cite></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="contact-box reveal">
+          <div><h2>Seu próximo treino começa aqui.</h2><p>Fale com a equipe, consulte planos, grade atualizada das aulas e horários de funcionamento em feriados.</p></div>
+          <div class="contact-actions">
+            <a class="btn" href="https://wa.me/5521968200542?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20conhecer%20os%20planos%20da%20Hartt%20Fitness." target="_blank" rel="noopener">Conversar no WhatsApp</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/academiaharttoficial/" target="_blank" rel="noopener">Acompanhar no Instagram</a>
+            <a class="btn btn-outline" href="tel:+552135986574">Ligar: (21) 3598-6574</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid container">
+      <a class="brand" href="#inicio"><span class="brand-mark">H</span><span class="brand-copy"><strong>HARTT</strong><small>FITNESS</small></span></a>
+      <p>Rua Canaã, 136 • Marechal Hermes • Rio de Janeiro</p>
+      <div class="footer-links"><a href="#modalidades">Modalidades</a><a href="#galeria">Galeria</a><a href="#contato">Contato</a></div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/5521968200542?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Hartt%20Fitness." target="_blank" rel="noopener" aria-label="Falar com a Hartt Fitness pelo WhatsApp">✆</a>
+
+  <script>
+    const menuButton = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuButton.addEventListener('click', () => {
+      const opened = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', opened);
+      menuButton.textContent = opened ? '×' : '☰';
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      });
+    });
+
+    const tabs = document.querySelectorAll('.gallery-tab');
+    const panels = document.querySelectorAll('.gallery-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(item => {
+          item.classList.remove('active');
+          item.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(panel => panel.classList.remove('active'));
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.dataset.galleryTarget).classList.add('active');
+      });
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+  </script>
+</body>
+</html>
